@@ -19,9 +19,10 @@ const searchController = (() => {
                 const result = await fetch(baseURL + query);
                 const data = await result.json();
                 state.search = data.result.records;
-                state.search.forEach((el) => {
-                    console.log(el["Company Name"]);
-                })
+                // state.search.forEach((el) => {
+                //     console.log(el["Company Name"]);
+                // })
+                return data.result;
             } catch (error) { alert('There was an error with your search') };
 
         }
@@ -37,25 +38,37 @@ const UIController = (() => {
         searchForm: '#searchForm',
         searchInput: '#searchInput',
         searchButton: '#searchButton',
-        clearButton: '#clearButton'
+        clearButton: '#clearButton',
+        resultsList: '#resultsList'
     }
 
 
     return {
-        getDOMStrings: function() {
+        getDOMStrings: () => {
             return DOMStrings;
         },
 
-        clearInput: function() {
+        clearInput: () => {
             document.querySelector(DOMStrings.searchInput).value = '';
         },
 
-        getInput: function() {
+        getInput: () => {
             return document.querySelector(DOMStrings.searchInput).value;
         },
 
-        setPlaceholder: function(value) {
+        setPlaceholder: (value) => {
             document.querySelector(DOMStrings.searchInput).placeholder = value;
+        },
+        renderResults: (results) => {
+            const resultsList = document.querySelector(DOMStrings.resultsList);
+            console.log(resultsList);
+
+            resultsList.innerHTML = '';
+
+            results.forEach(result => {
+                let li = `<li>${result["Company Name"]}</li>`;
+                resultsList.innerHTML += li;
+            })
         }
     }
 
@@ -76,10 +89,11 @@ const controller = ((searchCtrl, UICtrl) => {
             const input = UICtrl.getInput();
 
             if (input) {
-                await searchCtrl.search(input);
+                const result = await searchCtrl.search(input);
                 UICtrl.setPlaceholder(input);
                 UICtrl.clearInput();
-
+                console.log(result.records);
+                UICtrl.renderResults(result.records)
             }
 
 
@@ -92,7 +106,7 @@ const controller = ((searchCtrl, UICtrl) => {
     };
 
     return {
-        init: function() {
+        init: () => {
             setupEventListeners();
         }
     }

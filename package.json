@@ -1,12 +1,17 @@
 {
-  "name": "company_search",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+    "name": "company_search",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "scss": "node-sass src/scss/styles.scss -o dist/css",
+        "scss:watch": "npm run scss && node-sass src/scss/styles.scss -wo dist/css"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "node-sass": "^5.0.0"
+    }
 }
