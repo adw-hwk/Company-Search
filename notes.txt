@@ -1,0 +1,47 @@
+QUERY PARAMETER SEARCHES
+
+Endpoint: https://data.gov.au/data/api/3/action/datastore_search
+
+Parameters:
+
+resource_id=cb7e4eb5-ed46-4c6c-97a0-4532f4479b7d
+q= - QUERY
+limit= - limit
+
+example query:
+
+https://data.gov.au/data/api/3/action/datastore_search?resource_id=cb7e4eb5-ed46-4c6c-97a0-4532f4479b7d&q=woolworths
+
+
+
+
+SQL SEARCHES
+
+Database name: "cb7e4eb5-ed46-4c6c-97a0-4532f4479b7d"
+
+Database fields:
+
+"Status", "Modified since last report", "Current Name", "Current Name Indicator", "Sub Class", "_full_text", "ACN", "ABN", "State Registration Number", "Date of Registration", "Current Name Start Date", "Previous State of Registration", "_id", "Type", "Class", "Company Name"
+
+Key fields:
+
+"Company Name"
+"Date of Registration" (to sort by, parent companies are registered first)
+"_id" - may be useful for future functionality
+
+Test queries:
+
+https://data.gov.au/data/api/3/action/datastore_search_sql?sql=SELECT "Company Name" FROM "cb7e4eb5-ed46-4c6c-97a0-4532f4479b7d" LIMIT(5)
+
+https://data.gov.au/data/api/3/action/datastore_search_sql?sql=SELECT * FROM "cb7e4eb5-ed46-4c6c-97a0-4532f4479b7d" WHERE "Company Name" LIKE '%FIRST NATIONAL%'
+
+https://data.gov.au/data/api/3/action/datastore_search_sql?sql=SELECT * FROM "cb7e4eb5-ed46-4c6c-97a0-4532f4479b7d" WHERE "Company Name" LIKE '%FIRST NATIONAL%' ORDER BY CONVERT(varchar(10), "Date of Registration", 101)
+
+
+
+
+
+form options
+
+Sort BY
+registered?
