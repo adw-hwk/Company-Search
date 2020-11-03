@@ -26,7 +26,7 @@ const searchController = (() => {
         },
 
         stringToDate: (dateString) => {
-            // expected date format DD/MM/YYYY
+            // expected dateString format DD/MM/YYYY
             // crude validation of input date string, improve later
             if (
                 dateString.length === 10 &&
@@ -37,8 +37,9 @@ const searchController = (() => {
                 try {
                     const dateArr = dateString.split("/");
 
-                    // DD - dateArr[0], MM - dateArr[1], YYYY - dateArr[2]
-                    const regDate = new Date(`${dateArr[0]}-${dateArr[1]}-${dateArr[2]}`);
+                    // required format for Date() - MM-DD-YYYY (why? idk, because America I suppose)
+                    // MM - dateArr[1], MM - dateArr[0], YYYY - dateArr[2]
+                    const regDate = new Date(`${dateArr[1]}-${dateArr[0]}-${dateArr[2]}`);
 
                     return regDate;
                 } catch (e) {
@@ -52,11 +53,18 @@ const searchController = (() => {
             }
         },
 
-        sortResultsByDate: (results) => {
+        // searchControllers own stringToDate function (above) is passed as converterFunc argument in the form submit event listener inside app controller
+        sortResultsByDate: (results, converterFunc, oldestToNewest = true) => {
 
-            return results.sort((cur, next) => {
-                return stringToDate(cur["Date of Registration"]).getTime() > stringToDate(next["Date of Registration"]).getTime() ? 1 : -1
-            });
+            if (oldestToNewest) {
+                return results.sort((cur, next) => {
+                    return converterFunc(cur["Date of Registration"]).getTime() > converterFunc(next["Date of Registration"]).getTime() ? 1 : -1
+                });
+            } else {
+                return results.sort((cur, next) => {
+                    return converterFunc(cur["Date of Registration"]).getTime() < converterFunc(next["Date of Registration"]).getTime() ? 1 : -1
+                });
+            }
 
         },
     };
@@ -91,7 +99,6 @@ const UIController = (() => {
         },
         renderResults: (results) => {
             const resultsList = document.querySelector(DOMStrings.resultsList);
-            console.log(resultsList);
 
             resultsList.innerHTML = "";
 
@@ -121,8 +128,8 @@ const controller = ((searchCtrl, UICtrl) => {
                     UICtrl.setPlaceholder(input);
                     UICtrl.clearInput();
 
-
-                    // UICtrl.renderResults(result.records);
+                    const sortedResults = searchCtrl.sortResultsByDate(result.records, searchCtrl.stringToDate);
+                    UICtrl.renderResults(sortedResults);
                 }
             });
 
