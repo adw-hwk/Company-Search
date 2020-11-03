@@ -94,7 +94,7 @@ const searchController = (() => {
                         (a.year === b.year && a.month === b.month && a.day > b.day)
                     );
 
-                    return sortCondition ? 1 : -1; 
+                    return sortCondition ? 1 : -1;
 
                 } else {
                     sortCondition = (
@@ -131,7 +131,6 @@ const UIController = (() => {
         searchForm: "#searchForm",
         searchInput: "#searchInput",
         searchButton: "#searchButton",
-        clearButton: "#clearButton",
         resultsList: "#resultsList",
     };
 
@@ -157,7 +156,7 @@ const UIController = (() => {
             resultsList.innerHTML = "";
 
             results.forEach((result) => {
-                let li = `<li class="result-card"><h2 class="company-name">${result["Company Name"]}<a target="_blank" href="https://google.com/search?q=${result["Company Name"]}"><i class="fab fa-google"></i></a></h2><div>Date of Registration: <span class="bold">${result["Date of Registration"]}</span></div><div>ABN: <span class="bold">${result["ABN"]}</span></div></li>`;
+                let li = `<li class="result-card"><h2 style="display:flex;" class="company-name">${result["Company Name"]}<a target="_blank" style="margin-left: auto;" href="https://google.com/search?q=${result["Company Name"]}"><i class="fab fa-google"></i></a></h2><div>Date of Registration: <span class="bold">${result["Date of Registration"]}</span></div><div>ABN: <span class="bold">${result["ABN"]}</span></div></li>`;
                 resultsList.innerHTML += li;
             });
         },
@@ -186,10 +185,6 @@ const controller = ((searchCtrl, UICtrl) => {
                     UICtrl.renderResults(sortedResults);
                 }
             });
-
-        document.querySelector(DOM.clearButton).addEventListener("click", () => {
-            UICtrl.clearInput();
-        });
     };
 
     return {
