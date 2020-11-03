@@ -66,7 +66,7 @@ const UIController = (() => {
             resultsList.innerHTML = '';
 
             results.forEach(result => {
-                let li = `<li>${result["Company Name"]}</li>`;
+                let li = `<li class="result-card"><h2 class="company-name">${result["Company Name"]}<a target="_blank" href="https://google.com/search?q=${result["Company Name"]}"><i class="fab fa-google"></i></a></h2><div>Date of Registration: <span class="bold">${result["Date of Registration"]}</span></div><div>ABN: <span class="bold">${result["ABN"]}</span></div></li>`;
                 resultsList.innerHTML += li;
             })
         }
