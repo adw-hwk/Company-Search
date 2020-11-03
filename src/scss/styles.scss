@@ -18,7 +18,6 @@ body {
 
 #searchForm {
     display: flex;
-
     button {
         width: 55px;
         padding: 0.4rem;
@@ -48,27 +47,33 @@ body {
     width: 100%;
     max-width: 65rem;
     margin: 0 auto;
-
     #resultsList {
         list-style: none;
         margin: 0;
         padding: 0;
-        li.result-card {
+        .result-card {
             margin: 0.5rem 0;
             display: block;
             padding: 0.85rem 1rem;
             background-color: white;
             border-radius: 3px;
             color: #2b2b2b;
-
             .bold {
                 font-weight: 700;
+            }
+            .google-icon {
+                transition: 200ms ease-in-out;
+                width: 40px;
+                height: 40px;
+                opacity: 0.7;
+                &:hover {
+                    transform: scale(1.1);
+                    opacity: 1;
+                }
             }
         }
     }
 }
-
-
 
 #searchButton {
     border: 3px solid rgb(33, 188, 88);
@@ -93,8 +98,8 @@ body {
 
 #searchInput {
     padding: 0.7rem 0.9rem;
-    border: 2px solid rgba(0,0,0,0.3);
-    box-shadow: inset 0px 0px 6px rgba(0,0,0,0.3);
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0px 0px 6px rgba(0, 0, 0, 0.3);
     width: 16rem;
     max-width: 100%;
 }

@@ -13,6 +13,7 @@ const searchController = (() => {
             try {
                 const result = await fetch(baseURL + query);
                 const data = await result.json();
+                console.log(data.result);
                 search.results = data.result.records;
 
                 return data.result.records;
@@ -54,20 +55,9 @@ const searchController = (() => {
         // },
 
         // searchControllers own stringToDate function (above) is passed as converterFunc argument in the form submit event listener inside app controller
+
         sortResultsByDate: (results, oldestToNewest = true) => {
-
-            // if (oldestToNewest) {
-            //     return results.sort((cur, next) => {
-            //         return converterFunc(cur["Date of Registration"]).getTime() > converterFunc(next["Date of Registration"]).getTime() ? 1 : -1
-            //     });
-            // } else {
-            //     return results.sort((cur, next) => {
-            //         return converterFunc(cur["Date of Registration"]).getTime() < converterFunc(next["Date of Registration"]).getTime() ? 1 : -1
-            //     });
-            // }
-
             return results.sort((cur, next) => {
-
                 const curDate = cur["Date of Registration"];
                 const nextDate = next["Date of Registration"];
 
@@ -75,51 +65,33 @@ const searchController = (() => {
                 const a = {
                     day: Number(curDate.slice(0, 2)),
                     month: Number(curDate.slice(3, 5)),
-                    year: Number(curDate.slice(6))
+                    year: Number(curDate.slice(6)),
                 };
 
                 // date object for next result
                 const b = {
                     day: Number(nextDate.slice(0, 2)),
                     month: Number(nextDate.slice(3, 5)),
-                    year: Number(nextDate.slice(6))
+                    year: Number(nextDate.slice(6)),
                 };
 
                 let sortCondition;
 
                 if (oldestToNewest) {
-                    sortCondition = (
-                        (a.year > b.year) ||
+                    sortCondition =
+                        a.year > b.year ||
                         (a.year === b.year && a.month > b.month) ||
-                        (a.year === b.year && a.month === b.month && a.day > b.day)
-                    );
-
-                    return sortCondition ? 1 : -1;
-
+                        (a.year === b.year && a.month === b.month && a.day > b.day);
                 } else {
-                    sortCondition = (
-                        (a.year < b.year) ||
+                    sortCondition =
+                        a.year < b.year ||
                         (a.year === b.year && a.month < b.month) ||
-                        (a.year === b.year && a.month === b.month && a.day < b.day)
-                    );
-
-                    return sortCondition ? 1 : -1;
+                        (a.year === b.year && a.month === b.month && a.day < b.day);
 
                 }
+                return sortCondition ? 1 : -1;
 
-            })
-
-            /*
-
-            DATE COMPARISON
-            cur & next
-
-            if cur.year > next.year:
-                -swap entries
-            
-
-            */
-
+            });
         },
     };
 })();
@@ -133,6 +105,42 @@ const UIController = (() => {
         searchButton: "#searchButton",
         resultsList: "#resultsList",
     };
+
+    const card = {
+        // - Company Name
+        // - Current Name
+        title: (record) => {
+            let HTML = '';
+
+            if (record["Company Name"] !== null && record["Company Name"].length) {
+                HTML += `<h2 class="company-name">${record["Company Name"]}</h2>`;
+            }
+
+            if (record["Current Name"] !== null && record["Current Name"].length) {
+                HTML += `<h4 class="current-name">${record["Current Name"]} <em><small>(Current name)</small></em></h4>`;
+            }
+
+            return HTML;
+        },
+
+        detailsText: (record, field) => {
+
+            let HTML = '';
+
+            if (record[field]) { HTML += `<div>${field}: <span class="bold">${record[field]}</span></div>` }
+
+            return HTML;
+
+        },
+
+        googleIcon: (record) => {
+
+            return `<a target="_blank" style="margin-left: auto;" href="https://google.com/search?q=${record["Company Name"]}"><img class="google-icon" src="dist/img/googleSearchIcon.png" height=40 width=40></a>`;
+
+        }
+    };
+
+
 
     return {
         getDOMStrings: () => {
@@ -153,11 +161,33 @@ const UIController = (() => {
         renderResults: (results) => {
             const resultsList = document.querySelector(DOMStrings.resultsList);
 
+            const infoKeys = [
+                "Date of Registration",
+                "ABN",
+                "ACN",
+                "Current Name Start Date",
+                "Previous State of Registration",
+                "Status",
+                "Class",
+                "Sub Class",
+                "Type"
+            ];
+
             resultsList.innerHTML = "";
 
             results.forEach((result) => {
-                let li = `<li class="result-card"><h2 style="display:flex;" class="company-name">${result["Company Name"]}<a target="_blank" style="margin-left: auto;" href="https://google.com/search?q=${result["Company Name"]}"><i class="fab fa-google"></i></a></h2><div>Date of Registration: <span class="bold">${result["Date of Registration"]}</span></div><div>ABN: <span class="bold">${result["ABN"]}</span></div></li>`;
-                resultsList.innerHTML += li;
+
+                let cardHTML = '';
+                let titleHTML = card.title(result);
+                let infoHTML = '';
+                let googleHTML = card.googleIcon(result);
+
+                infoKeys.forEach((key) => { if (result[key]) { infoHTML += card.detailsText(result, key) } });
+
+                cardHTML = `<div class="result-card">${titleHTML + infoHTML + googleHTML}</div>`
+
+                resultsList.innerHTML += cardHTML;
+
             });
         },
     };
