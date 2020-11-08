@@ -1,19 +1,34 @@
+@import '../../node_modules/bootstrap/scss/bootstrap.scss';
 // RESPONSIVE BREAKPOINTS (bp-<size>)
 $bp-sm: "576px";
 $bp-md: "768px";
 $bp-lg: "992px";
 $bp-xl: "1200px";
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
 body {
     padding-top: 15px;
-    background-color: #282828;
-    color: white;
+    background-color: #334;
     font-family: 'Nunito Sans';
+    position: relative;
+    padding-top: 150px;
 }
 
 .search-bar {
-    background-color: #0c0032;
-    border-radius: 5px;
+    background-color: #445;
     padding: 2.5rem;
+    margin: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 999;
 }
 
 #searchForm {
@@ -35,6 +50,18 @@ body {
     input {
         border-radius: 4px;
         margin: 0 0.4rem;
+        text-transform: uppercase;
+    }
+    #searchInput {
+        padding: 0.7rem 0.9rem;
+        border: 2px solid rgba(0, 0, 0, 0.3);
+        box-shadow: inset 0px 0px 6px rgba(0, 0, 0, 0.3);
+        width: 16rem;
+        max-width: 100%;
+    }
+    #searchButton {
+        border: 3px solid rgb(33, 188, 88);
+        color: rgb(33, 188, 88);
     }
 }
 
@@ -45,61 +72,81 @@ body {
 
 .results-container {
     width: 100%;
-    max-width: 65rem;
+    max-width: 70rem;
     margin: 0 auto;
+    padding: 0.75rem;
     #resultsList {
-        list-style: none;
-        margin: 0;
-        padding: 0;
         .result-card {
-            margin: 0.5rem 0;
-            display: block;
-            padding: 0.85rem 1rem;
-            background-color: white;
+            padding: 1rem;
+            background: white;
             border-radius: 3px;
-            color: #2b2b2b;
-            .bold {
-                font-weight: 700;
+            margin-bottom: 1rem;
+            .card-top {
+                padding: 1rem 0;
+                border-bottom: 3px solid lightgray;
+                .comp-name {
+                    font-weight: bold;
+                    letter-spacing: 1px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    a {
+                        transform: scale(1);
+                        opacity: 0.75;
+                        transition: 200ms ease-in-out;
+                        &:hover {
+                            transform: scale(1.1);
+                            opacity: 1;
+                        }
+                    }
+                }
+                .curr-subtext {
+                    opacity: 0.75;
+                    text-transform: uppercase;
+                }
             }
-            .google-icon {
-                transition: 200ms ease-in-out;
-                width: 40px;
-                height: 40px;
-                opacity: 0.7;
-                &:hover {
-                    transform: scale(1.1);
-                    opacity: 1;
+            .card-bottom {
+                display: flex;
+                flex-wrap: wrap;
+                padding: 1rem 0;
+                .info-group {
+                    padding: 1rem;
+                    margin-left: -1rem;
+                    margin-right: 1rem;
+                    .field {
+                        white-space: nowrap;
+                        border-bottom: 1px solid lightgray;
+                        text-transform: uppercase;
+                        font-size: 12px;
+                        font-weight: bold;
+                    }
+                    .value {
+                        padding: 0.5rem 0;
+                        font-size: 18px;
+                    }
                 }
             }
         }
     }
 }
 
-#searchButton {
-    border: 3px solid rgb(33, 188, 88);
-    color: rgb(33, 188, 88);
+.spinLoader {
+    border: 16px solid #aab;
+    /* Light grey */
+    border-top: 16px solid #223;
+    /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+    margin: auto;
 }
 
-#clearButton {
-    border: 3px solid rgb(188, 33, 88);
-    color: rgb(188, 33, 88);
-}
-
-@media only screen and (min-width: $bp-xl) {
-    #clearButton:hover {
-        background-color: rgb(188, 33, 88);
-        color: white;
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
     }
-    #searchButton:hover {
-        background-color: rgb(33, 188, 88);
-        color: white;
+    100% {
+        transform: rotate(360deg);
     }
-}
-
-#searchInput {
-    padding: 0.7rem 0.9rem;
-    border: 2px solid rgba(0, 0, 0, 0.3);
-    box-shadow: inset 0px 0px 6px rgba(0, 0, 0, 0.3);
-    width: 16rem;
-    max-width: 100%;
 }

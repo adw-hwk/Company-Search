@@ -3,15 +3,33 @@
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
+    "babel": {
+        "presets": [
+            "@babel/preset-env"
+        ],
+        "plugins": [
+            "@babel/plugin-transform-runtime"
+        ]
+    },
+    "browserslist": [
+        ">1%",
+        "last 2 versions",
+        "IE 11"
+    ],
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "scss": "node-sass src/scss/styles.scss -o dist/css",
-        "scss:watch": "npm run scss && node-sass src/scss/styles.scss -wo dist/css"
+        "dev": "parcel src/index.html --no-source-maps",
+        "prod": "parcel build src/index.html --no-source-maps"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "devDependencies": {
-        "node-sass": "^5.0.0"
+        "@babel/core": "^7.12.3",
+        "@babel/plugin-transform-runtime": "^7.12.1",
+        "parcel-bundler": "^1.12.4",
+        "sass": "^1.29.0"
+    },
+    "dependencies": {
+        "bootstrap": "^4.5.3"
     }
 }
