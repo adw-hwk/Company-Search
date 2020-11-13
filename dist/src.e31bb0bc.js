@@ -1041,7 +1041,8 @@ var searchController = function () {
       var oldestToNewest = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
       return results.sort(function (cur, next) {
         var curDate = cur["Date of Registration"];
-        var nextDate = next["Date of Registration"]; // date object for current result
+        var nextDate = next["Date of Registration"]; // Date format: DD/MM/YYYY
+        // date object for current result
 
         var a = {
           day: Number(curDate.slice(0, 2)),
@@ -1054,7 +1055,7 @@ var searchController = function () {
           month: Number(nextDate.slice(3, 5)),
           year: Number(nextDate.slice(6))
         };
-        var sortCondition;
+        var sortCondition; // comparing date objects to determine whether a is more recent than b depending on oldestToNewest
 
         if (oldestToNewest) {
           sortCondition = a.year > b.year || a.year === b.year && a.month > b.month || a.year === b.year && a.month === b.month && a.day > b.day;
@@ -1075,7 +1076,7 @@ var UIController = function () {
     searchInput: "#searchInput",
     searchButton: "#searchButton",
     resultsList: "#resultsList",
-    spinLoader: "#spinLoader"
+    spinLoader: ".spinLoader"
   };
 
   var loader = function loader() {
@@ -1265,7 +1266,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51049" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61418" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

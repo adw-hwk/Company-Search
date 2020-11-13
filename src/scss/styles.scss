@@ -4,23 +4,39 @@ $bp-sm: "576px";
 $bp-md: "768px";
 $bp-lg: "992px";
 $bp-xl: "1200px";
+// THEME COLOURS
+$offwhite: #f6f7f7;
+$grey: #b4bbb8;
+$mandarin: #f18c44;
+$maingreen: #1D8754;
+$maingreendarker: #0e6d3f;
+$maingreendark: #00512a;
+$formshadow: 0px 0px 6px rgba(0, 0, 0, 0.15);
 *,
 *:before,
 *:after {
     box-sizing: border-box;
+    font-size: 1.4rem;
+}
+
+html {
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
     scroll-behavior: smooth;
 }
 
 body {
     padding-top: 15px;
-    background-color: #334;
+    background-color: $offwhite;
     font-family: 'Nunito Sans';
     position: relative;
     padding-top: 150px;
+    color: #445;
 }
 
 .search-bar {
-    background-color: #445;
+    background-color: $maingreen;
     padding: 2.5rem;
     margin: 0;
     position: fixed;
@@ -33,35 +49,38 @@ body {
 
 #searchForm {
     display: flex;
-    button {
+    #searchInput {
+        padding: 0.7rem 1.2rem;
+        width: 22rem;
+        max-width: 100%;
+        // font-weight: bold;
+        border-radius: 5px;
+        // outline: 0;
+        // border: 0;
+        background: $offwhite;
+        border: 2px solid $maingreendarker;
+        &:focus {
+            box-shadow: $formshadow;
+            border: 2px solid $maingreendark;
+        }
+    }
+    #searchButton {
+        color: $maingreendark;
+        border: 2px solid $maingreendarker;
+        // outline: 0;
+        background: $offwhite;
         width: 55px;
-        padding: 0.4rem;
-        outline: none;
-        border-radius: 4px;
+        height: 55px;
         display: flex;
         justify-content: center;
         align-items: center;
-        margin: 0 0.1rem;
-        transition: 200ms linear;
+        border-radius: 50%;
+        margin-left: 1rem;
         &:hover {
             cursor: pointer;
+            box-shadow: $formshadow;
+            border: 2px solid $maingreendark;
         }
-    }
-    input {
-        border-radius: 4px;
-        margin: 0 0.4rem;
-        text-transform: uppercase;
-    }
-    #searchInput {
-        padding: 0.7rem 0.9rem;
-        border: 2px solid rgba(0, 0, 0, 0.3);
-        box-shadow: inset 0px 0px 6px rgba(0, 0, 0, 0.3);
-        width: 16rem;
-        max-width: 100%;
-    }
-    #searchButton {
-        border: 3px solid rgb(33, 188, 88);
-        color: rgb(33, 188, 88);
     }
 }
 
@@ -70,60 +89,56 @@ body {
     justify-content: center;
 }
 
-.results-container {
-    width: 100%;
-    max-width: 70rem;
-    margin: 0 auto;
-    padding: 0.75rem;
-    #resultsList {
-        .result-card {
-            padding: 1rem;
-            background: white;
-            border-radius: 3px;
-            margin-bottom: 1rem;
-            .card-top {
-                padding: 1rem 0;
-                border-bottom: 3px solid lightgray;
-                .comp-name {
-                    font-weight: bold;
-                    letter-spacing: 1px;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    a {
-                        transform: scale(1);
-                        opacity: 0.75;
-                        transition: 200ms ease-in-out;
-                        &:hover {
-                            transform: scale(1.1);
-                            opacity: 1;
-                        }
-                    }
-                }
-                .curr-subtext {
+#resultsList {
+    .result-card {
+        padding: 1rem;
+        background: white;
+        border-radius: 3px;
+        margin-bottom: 1rem;
+        .card-top {
+            padding: 1rem 0;
+            border-bottom: 3px solid lightgray;
+            small {
+                color: $maingreen;
+            }
+            .comp-name {
+                font-weight: bold;
+                letter-spacing: 1px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                a {
+                    transform: scale(1);
                     opacity: 0.75;
-                    text-transform: uppercase;
+                    transition: 200ms ease-in-out;
+                    transition-property: opacity, transform;
+                    &:hover {
+                        transform: scale(1.1);
+                        opacity: 1;
+                    }
                 }
             }
-            .card-bottom {
-                display: flex;
-                flex-wrap: wrap;
-                padding: 1rem 0;
-                .info-group {
-                    padding: 1rem;
-                    margin-left: -1rem;
-                    margin-right: 1rem;
-                    .field {
-                        white-space: nowrap;
-                        border-bottom: 1px solid lightgray;
-                        text-transform: uppercase;
-                        font-size: 12px;
-                        font-weight: bold;
-                    }
-                    .value {
-                        padding: 0.5rem 0;
-                        font-size: 18px;
-                    }
+        }
+        .card-bottom {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 1rem 0;
+            .info-group {
+                padding: 1rem;
+                margin-left: -1rem;
+                margin-right: 1rem;
+                .field {
+                    white-space: nowrap;
+                    border-bottom: 1px solid lightgray;
+                    // text-transform: uppercase;
+                    font-size: 0.9rem;
+                    font-weight: bold;
+                    color: $maingreen;
+                    letter-spacing: 1px;
+                    padding: 0 0.1rem;
+                }
+                .value {
+                    padding: 0.5rem 0.1rem;
                 }
             }
         }
@@ -131,22 +146,28 @@ body {
 }
 
 .spinLoader {
-    border: 16px solid #aab;
+    border: 12px solid $grey;
     /* Light grey */
-    border-top: 16px solid #223;
+    border-top: 12px solid $maingreen;
     /* Blue */
     border-radius: 50%;
-    width: 120px;
-    height: 120px;
-    animation: spin 2s linear infinite;
-    margin: auto;
+    width: 100px;
+    height: 100px;
+    animation: spin 1s ease infinite;
+    margin: 10rem auto;
 }
 
 @keyframes spin {
     0% {
         transform: rotate(0deg);
+        // border-width: 12px;
     }
+    // 50% {
+    //     transform: rotate(180deg);
+    //     // border-width: 4px;
+    // }
     100% {
         transform: rotate(360deg);
+        // border-width: 12px;
     }
 }

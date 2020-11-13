@@ -9900,19 +9900,27 @@ h3 {
 *:before,
 *:after {
   box-sizing: border-box;
+  font-size: 1.4rem;
+}
+
+html {
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
   scroll-behavior: smooth;
 }
 
 body {
   padding-top: 15px;
-  background-color: #334;
+  background-color: #f6f7f7;
   font-family: "Nunito Sans";
   position: relative;
   padding-top: 150px;
+  color: #445;
 }
 
 .search-bar {
-  background-color: #445;
+  background-color: #1D8754;
   padding: 2.5rem;
   margin: 0;
   position: fixed;
@@ -9926,35 +9934,34 @@ body {
 #searchForm {
   display: flex;
 }
-#searchForm button {
+#searchForm #searchInput {
+  padding: 0.7rem 1.2rem;
+  width: 22rem;
+  max-width: 100%;
+  border-radius: 5px;
+  background: #f6f7f7;
+  border: 2px solid #0e6d3f;
+}
+#searchForm #searchInput:focus {
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.15);
+  border: 2px solid #00512a;
+}
+#searchForm #searchButton {
+  color: #00512a;
+  border: 2px solid #0e6d3f;
+  background: #f6f7f7;
   width: 55px;
-  padding: 0.4rem;
-  outline: none;
-  border-radius: 4px;
+  height: 55px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 0.1rem;
-  transition: 200ms linear;
+  border-radius: 50%;
+  margin-left: 1rem;
 }
-#searchForm button:hover {
+#searchForm #searchButton:hover {
   cursor: pointer;
-}
-#searchForm input {
-  border-radius: 4px;
-  margin: 0 0.4rem;
-  text-transform: uppercase;
-}
-#searchForm #searchInput {
-  padding: 0.7rem 0.9rem;
-  border: 2px solid rgba(0, 0, 0, 0.3);
-  box-shadow: inset 0px 0px 6px rgba(0, 0, 0, 0.3);
-  width: 16rem;
-  max-width: 100%;
-}
-#searchForm #searchButton {
-  border: 3px solid #21bc58;
-  color: #21bc58;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.15);
+  border: 2px solid #00512a;
 }
 
 .search-form {
@@ -9962,74 +9969,69 @@ body {
   justify-content: center;
 }
 
-.results-container {
-  width: 100%;
-  max-width: 70rem;
-  margin: 0 auto;
-  padding: 0.75rem;
-}
-.results-container #resultsList .result-card {
+#resultsList .result-card {
   padding: 1rem;
   background: white;
   border-radius: 3px;
   margin-bottom: 1rem;
 }
-.results-container #resultsList .result-card .card-top {
+#resultsList .result-card .card-top {
   padding: 1rem 0;
   border-bottom: 3px solid lightgray;
 }
-.results-container #resultsList .result-card .card-top .comp-name {
+#resultsList .result-card .card-top small {
+  color: #1D8754;
+}
+#resultsList .result-card .card-top .comp-name {
   font-weight: bold;
   letter-spacing: 1px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.results-container #resultsList .result-card .card-top .comp-name a {
+#resultsList .result-card .card-top .comp-name a {
   transform: scale(1);
   opacity: 0.75;
   transition: 200ms ease-in-out;
+  transition-property: opacity, transform;
 }
-.results-container #resultsList .result-card .card-top .comp-name a:hover {
+#resultsList .result-card .card-top .comp-name a:hover {
   transform: scale(1.1);
   opacity: 1;
 }
-.results-container #resultsList .result-card .card-top .curr-subtext {
-  opacity: 0.75;
-  text-transform: uppercase;
-}
-.results-container #resultsList .result-card .card-bottom {
+#resultsList .result-card .card-bottom {
   display: flex;
   flex-wrap: wrap;
   padding: 1rem 0;
 }
-.results-container #resultsList .result-card .card-bottom .info-group {
+#resultsList .result-card .card-bottom .info-group {
   padding: 1rem;
   margin-left: -1rem;
   margin-right: 1rem;
 }
-.results-container #resultsList .result-card .card-bottom .info-group .field {
+#resultsList .result-card .card-bottom .info-group .field {
   white-space: nowrap;
   border-bottom: 1px solid lightgray;
-  text-transform: uppercase;
-  font-size: 12px;
+  font-size: 0.9rem;
   font-weight: bold;
+  color: #1D8754;
+  letter-spacing: 1px;
+  padding: 0 0.1rem;
 }
-.results-container #resultsList .result-card .card-bottom .info-group .value {
-  padding: 0.5rem 0;
-  font-size: 18px;
+#resultsList .result-card .card-bottom .info-group .value {
+  padding: 0.5rem 0.1rem;
 }
 
 .spinLoader {
-  border: 16px solid #aab;
+  border: 12px solid #b4bbb8;
   /* Light grey */
-  border-top: 16px solid #223;
+  border-top: 12px solid #1D8754;
   /* Blue */
   border-radius: 50%;
-  width: 120px;
-  height: 120px;
-  animation: spin 2s linear infinite;
-  margin: auto;
+  width: 100px;
+  height: 100px;
+  animation: spin 1s ease infinite;
+  margin: 10rem auto;
 }
 
 @keyframes spin {

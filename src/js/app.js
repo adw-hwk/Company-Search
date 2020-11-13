@@ -27,6 +27,8 @@ const searchController = (() => {
                 const curDate = cur["Date of Registration"];
                 const nextDate = next["Date of Registration"];
 
+                // Date format: DD/MM/YYYY
+
                 // date object for current result
                 const a = {
                     day: Number(curDate.slice(0, 2)),
@@ -43,6 +45,7 @@ const searchController = (() => {
 
                 let sortCondition;
 
+                // comparing date objects to determine whether a is more recent than b depending on oldestToNewest
                 if (oldestToNewest) {
                     sortCondition =
                         a.year > b.year ||
@@ -70,7 +73,7 @@ const UIController = (() => {
         searchInput: "#searchInput",
         searchButton: "#searchButton",
         resultsList: "#resultsList",
-        spinLoader: "#spinLoader"
+        spinLoader: ".spinLoader"
     };
 
     const loader = () => {
