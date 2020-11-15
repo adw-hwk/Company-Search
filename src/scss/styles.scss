@@ -1,4 +1,4 @@
-@import '../../node_modules/bootstrap/scss/bootstrap.scss';
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
 // RESPONSIVE BREAKPOINTS (bp-<size>)
 $bp-sm: "576px";
 $bp-md: "768px";
@@ -8,15 +8,22 @@ $bp-xl: "1200px";
 $offwhite: #f6f7f7;
 $grey: #b4bbb8;
 $mandarin: #f18c44;
-$maingreen: #1D8754;
+$maingreenlighter: #379869;
+$maingreen: #1d8754;
 $maingreendarker: #0e6d3f;
 $maingreendark: #00512a;
+$maincomp: #c2512a;
+$maincomplighter: #da734f;
+$maincomplight: #ffa485;
+$maincompdarker: #9d3613;
+$maincompdark: #741e00;
 $formshadow: 0px 0px 6px rgba(0, 0, 0, 0.15);
 *,
 *:before,
 *:after {
     box-sizing: border-box;
     font-size: 1.4rem;
+    word-break: break-word;
 }
 
 html {
@@ -29,7 +36,7 @@ html {
 body {
     padding-top: 15px;
     background-color: $offwhite;
-    font-family: 'Nunito Sans';
+    font-family: "Nunito Sans";
     position: relative;
     padding-top: 150px;
     color: #445;
@@ -45,48 +52,48 @@ body {
     right: 0;
     width: 100%;
     z-index: 999;
-}
-
-#searchForm {
-    display: flex;
-    #searchInput {
-        padding: 0.7rem 1.2rem;
-        width: 22rem;
-        max-width: 100%;
-        // font-weight: bold;
-        border-radius: 5px;
-        // outline: 0;
-        // border: 0;
-        background: $offwhite;
-        border: 2px solid $maingreendarker;
-        &:focus {
-            box-shadow: $formshadow;
-            border: 2px solid $maingreendark;
-        }
-    }
-    #searchButton {
-        color: $maingreendark;
-        border: 2px solid $maingreendarker;
-        // outline: 0;
-        background: $offwhite;
-        width: 55px;
-        height: 55px;
+    .search-form {
         display: flex;
         justify-content: center;
-        align-items: center;
-        border-radius: 50%;
-        margin-left: 1rem;
-        &:hover {
-            cursor: pointer;
-            box-shadow: $formshadow;
-            border: 2px solid $maingreendark;
+        #searchForm {
+            display: flex;
+            max-width: 100%;
+            width: 40rem;
+            #searchInput {
+                padding: 0.7rem 1.2rem;
+                flex: 1 1 auto;
+                // font-weight: bold;
+                border-radius: 5px;
+                // outline: 0;
+                // border: 0;
+                background: $offwhite;
+                border: 2px solid $maingreendarker;
+                &:focus {
+                    box-shadow: $formshadow;
+                    border: 2px solid $maingreendark;
+                }
+            }
+            #searchButton {
+                flex: 0 0 55px;
+                color: $maingreendark;
+                border: 2px solid $maingreendarker;
+                // outline: 0;
+                background: $offwhite;
+                width: 55px;
+                height: 55px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 50%;
+                margin-left: 1rem;
+                &:hover {
+                    cursor: pointer;
+                    box-shadow: $formshadow;
+                    border: 2px solid $maingreendark;
+                }
+            }
         }
     }
-}
-
-.search-form {
-    display: flex;
-    justify-content: center;
 }
 
 #resultsList {
@@ -95,6 +102,7 @@ body {
         background: white;
         border-radius: 3px;
         margin-bottom: 1rem;
+        box-shadow: $formshadow;
         .card-top {
             padding: 1rem 0;
             border-bottom: 3px solid lightgray;
@@ -146,28 +154,29 @@ body {
 }
 
 .spinLoader {
-    border: 12px solid $grey;
+    // border: 50px solid $grey;
     /* Light grey */
-    border-top: 12px solid $maingreen;
+    border-top: 50px solid $maincomplighter;
+    border-right: 50px solid $maincomplight;
+    border-bottom: 50px solid $maincomp;
+    border-left: 50px solid $maincompdarker;
     /* Blue */
     border-radius: 50%;
     width: 100px;
     height: 100px;
-    animation: spin 1s ease infinite;
+    animation: spin 900ms ease infinite;
     margin: 10rem auto;
+    box-shadow: 0px 0px 5px $formshadow;
 }
 
 @keyframes spin {
     0% {
         transform: rotate(0deg);
-        // border-width: 12px;
     }
-    // 50% {
-    //     transform: rotate(180deg);
-    //     // border-width: 4px;
-    // }
+    30% {
+        transform: rotate(-60deg);
+    }
     100% {
         transform: rotate(360deg);
-        // border-width: 12px;
     }
 }

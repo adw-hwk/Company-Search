@@ -1232,6 +1232,43 @@ var controller = function (searchCtrl, UICtrl) {
 }(searchController, UIController);
 
 controller.init();
+/*
+{
+ ---
+    {
+     ---
+        {
+         ---
+            {
+             ---_---
+                    {
+                     ---_---_---_---
+                                    {
+                                     ---_---_---_---_---_---_---_---
+                                                                    {
+                                                                     ---_---_---_---_---_---_---_---_---_---_---_---_---_---_---_---
+                                                                                                                                    {
+                                                                                                                                     ---_---_---_---_---_---_---_---_---_---_---_---_---_---_---_---_---_---_---_---_---_---_---_---_---_---_---_---_---_---_---_---
+                                                                                                                                                                                                                                                                    {
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------===>
+                                                                                                                                                                                                                                                                    }
+                                                                                                                                     ---_---_---_---_---_---_---_---_---_---_---_---_---_---_---_---_---_---_---_---_---_---_---_---_---_---_---_---_---_---_---_---
+                                                                                                                                    }
+                                                                     ---_---_---_---_---_---_---_---_---_---_---_---_---_---_---_---
+                                                                    }
+                                     ---_---_---_---_---_---_---_---
+                                    }
+                     ---_---_---_---
+                    }
+             ---_---
+            }
+         ---
+        }
+     ---
+    }
+ ---
+}
+*/
 },{"@babel/runtime/regenerator":"../node_modules/@babel/runtime/regenerator/index.js","@babel/runtime/helpers/asyncToGenerator":"../node_modules/@babel/runtime/helpers/asyncToGenerator.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
@@ -1266,7 +1303,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62945" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55464" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

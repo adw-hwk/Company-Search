@@ -9901,6 +9901,7 @@ h3 {
 *:after {
   box-sizing: border-box;
   font-size: 1.4rem;
+  word-break: break-word;
 }
 
 html {
@@ -9920,7 +9921,7 @@ body {
 }
 
 .search-bar {
-  background-color: #1D8754;
+  background-color: #1d8754;
   padding: 2.5rem;
   margin: 0;
   position: fixed;
@@ -9930,23 +9931,28 @@ body {
   width: 100%;
   z-index: 999;
 }
-
-#searchForm {
+.search-bar .search-form {
   display: flex;
+  justify-content: center;
 }
-#searchForm #searchInput {
-  padding: 0.7rem 1.2rem;
-  width: 22rem;
+.search-bar .search-form #searchForm {
+  display: flex;
   max-width: 100%;
+  width: 40rem;
+}
+.search-bar .search-form #searchForm #searchInput {
+  padding: 0.7rem 1.2rem;
+  flex: 1 1 auto;
   border-radius: 5px;
   background: #f6f7f7;
   border: 2px solid #0e6d3f;
 }
-#searchForm #searchInput:focus {
+.search-bar .search-form #searchForm #searchInput:focus {
   box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.15);
   border: 2px solid #00512a;
 }
-#searchForm #searchButton {
+.search-bar .search-form #searchForm #searchButton {
+  flex: 0 0 55px;
   color: #00512a;
   border: 2px solid #0e6d3f;
   background: #f6f7f7;
@@ -9958,15 +9964,10 @@ body {
   border-radius: 50%;
   margin-left: 1rem;
 }
-#searchForm #searchButton:hover {
+.search-bar .search-form #searchForm #searchButton:hover {
   cursor: pointer;
   box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.15);
   border: 2px solid #00512a;
-}
-
-.search-form {
-  display: flex;
-  justify-content: center;
 }
 
 #resultsList .result-card {
@@ -9974,13 +9975,14 @@ body {
   background: white;
   border-radius: 3px;
   margin-bottom: 1rem;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.15);
 }
 #resultsList .result-card .card-top {
   padding: 1rem 0;
   border-bottom: 3px solid lightgray;
 }
 #resultsList .result-card .card-top small {
-  color: #1D8754;
+  color: #1d8754;
 }
 #resultsList .result-card .card-top .comp-name {
   font-weight: bold;
@@ -10014,7 +10016,7 @@ body {
   border-bottom: 1px solid lightgray;
   font-size: 0.9rem;
   font-weight: bold;
-  color: #1D8754;
+  color: #1d8754;
   letter-spacing: 1px;
   padding: 0 0.1rem;
 }
@@ -10023,20 +10025,26 @@ body {
 }
 
 .spinLoader {
-  border: 12px solid #b4bbb8;
   /* Light grey */
-  border-top: 12px solid #1D8754;
+  border-top: 50px solid #da734f;
+  border-right: 50px solid #ffa485;
+  border-bottom: 50px solid #c2512a;
+  border-left: 50px solid #9d3613;
   /* Blue */
   border-radius: 50%;
   width: 100px;
   height: 100px;
-  animation: spin 1s ease infinite;
+  animation: spin 900ms ease infinite;
   margin: 10rem auto;
+  box-shadow: 0px 0px 5px 0px 0px 6px rgba(0, 0, 0, 0.15);
 }
 
 @keyframes spin {
   0% {
     transform: rotate(0deg);
+  }
+  30% {
+    transform: rotate(-60deg);
   }
   100% {
     transform: rotate(360deg);
